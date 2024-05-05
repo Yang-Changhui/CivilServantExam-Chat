@@ -28,11 +28,12 @@ CivilservantExam chat 是一个集成了公务员考试试题及其解答的大�
 
 数据集格式：
 [dataset_format](https://github.com/InternLM/xtuner/blob/main/docs/zh_cn/user_guides/dataset_format.md)
+
 数据准备:
 [dataset_prepare](https://github.com/InternLM/xtuner/blob/main/docs/zh_cn/user_guides/dataset_prepare.md)
 
 
-#### 🚀 XTuner微调
+## 🚀 XTuner微调
 
 1. 准备配置文件
 
