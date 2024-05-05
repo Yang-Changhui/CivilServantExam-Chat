@@ -26,10 +26,10 @@ CivilservantExam chat 是一个集成了公务员考试试题及其解答的大�
 
 ### 2. 数据预处理
 
-数据集格式：
+数据集格式:
 [dataset_format](https://github.com/InternLM/xtuner/blob/main/docs/zh_cn/user_guides/dataset_format.md)
 
-数据准备:
+数据准备: 
 [dataset_prepare](https://github.com/InternLM/xtuner/blob/main/docs/zh_cn/user_guides/dataset_prepare.md)
 
 
@@ -95,6 +95,18 @@ vim internlm2_chat_7b_qlora_oasst1_e3_copy.py
 cd ..
 xtuner train /root/civil-exam/config/internlm2_chat_7b_qlora_oasst1_e3_copy.py --deepspeed deepspeed_zero2
 ```
+
+#### 微调注意事项
+- 数据集的质量问题对模型的微调至关重要，在处理数据集时可以将其中多余的空格、\t、\n等符号删除，也可以使用正则表达式进行替换。
+- 微调时，数据量少的情况下很容易过拟合，因此在配置文件中设置evaluation_inputs，如果检测结果符合预期的时候，就尽量停止训练。
+
+要解决过拟合，参考剑锋大佬的意见，
+假如我们想要解决这个问题，其实可以通过以下两个方式解决：
+
+**减少保存权重文件的间隔并增加权重文件保存的上限：**这个方法实际上就是通过降低间隔结合评估问题的结果，从而找到最优的权重。我们可以每隔100个批次来看什么时候模型已经学到了这部分知识但是还保留着基本的常识，什么时候已经过拟合严重只会说一句话了。但是由于再配置文件有设置权重文件保存数量的上限，因此同时将这个上限加大也是非常必要的。
+
+**增加常规的对话数据集从而稀释原本数据的占比：**这个方法其实就是希望我们正常用对话数据集做指令微调的同时还加上一部分的数据集来让模型既能够学到正常对话，但是在遇到特定问题时进行特殊化处理。
+
 
 5. PTH 模型转换为 HuggingFace 模型
 
