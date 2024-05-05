@@ -9,9 +9,10 @@
 
 [<img src="./assets/modelscope_logo.png" width="20px" /> ModelScope][ModelScope-url]
 
-[HuggingFace_Model-url]: https://modelscope.cn/models/yangchanghui/civil-exam-internlm2-chat-7B/summary
+[ModelScope-url]: https://modelscope.cn/models/yangchanghui/civil-exam-internlm2-chat-7B/summary
 
 </div>
+
 ## 📖 简介
 
 CivilservantExam chat 是一个集成了公务员考试试题及其解答的大语言模型。该模型目前仅使用公开的公务员考试试题数据集[COIG](https://link.zhihu.com/?target=https%3A//huggingface.co/datasets/BAAI/COIG)，基于 InternLM2-Math-7B 模型，通过 xtuner 微调，专门设计用于解答公务员考试问题。目前使用的数据集有限，后续会尝试加入更多的数据集，以提升模型的泛化能力。
