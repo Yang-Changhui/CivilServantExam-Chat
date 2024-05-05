@@ -50,8 +50,8 @@ xtuner copy-cfg internlm2_chat_7b_qlora_oasst1_e3 .
 
 ```bash
 mkdir -p /root/civil-exam/model
+mkdir download.py
 ```
-`download.py`
 
 ```python
 import torch
@@ -82,8 +82,10 @@ vim internlm2_chat_7b_qlora_oasst1_e3_copy.py
 +       type=load_dataset, path='json', data_files=dict(train=data_path))
 
 - dataset=dict(type=load_dataset, path=data_path)
-+ dataset=dict(
-+       type=load_dataset, path='json', data_files=dict(train=data_path))
+
+-   template_map_fn=dict(
+-       type=template_map_fn_factory, template=prompt_template),
++   template_map_fn=None,
 ```
 
 
