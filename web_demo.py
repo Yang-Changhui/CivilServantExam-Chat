@@ -33,10 +33,11 @@ logger = logging.get_logger(__name__)
 
 # prepare model
 import os
+print(not os.path.exists('/home/xlab-app-center/model/civil-exam-internlm2-chat-7B'))
 if not os.path.exists('/home/xlab-app-center/model/civil-exam-internlm2-chat-7B'):
-    from modelscope.hub.snapshot_download import snapshot_download
+    from modelscope.snapshot_download import snapshot_download
     model_dir = snapshot_download('yangchanghui/civil-exam-internlm2-chat-7B', cache_dir='/home/xlab-app-center/model/civil-exam-internlm2-chat-7B')
-
+    print('model_dir',model_dir)
 @dataclass
 class GenerationConfig:
     # this config is used for chat to provide more diversity
@@ -241,8 +242,8 @@ def main():
     model, tokenizer = load_model()
     print('load model end.')
 
-    # user_avator = '/root/web_demo/InternLM/assets/robot.png'
-    # robot_avator = '/root/web_demo/InternLM/assets/robot.png'
+    user_avator = 'assets/robot.png'
+    robot_avator = 'assets/robot.png'
 
     st.title('Civil-Servent-Exam-InternLM2-Chat-7B')
 
@@ -260,16 +261,17 @@ def main():
     # Accept user input
     if prompt := st.chat_input('What is up?'):
         # Display user message in chat message container
-        with st.chat_message('user'):
+        with st.chat_message('user',avatar=user_avator):
             st.markdown(prompt)
         real_prompt = combine_history(prompt)
         # Add user message to chat history
         st.session_state.messages.append({
             'role': 'user',
             'content': prompt,
+            'avatar': user_avator
         })
 
-        with st.chat_message('robot'):
+        with st.chat_message('robot', avatar=robot_avator):
             message_placeholder = st.empty()
             for cur_response in generate_interactive(
                     model=model,
@@ -285,6 +287,7 @@ def main():
         st.session_state.messages.append({
             'role': 'robot',
             'content': cur_response,  # pylint: disable=undefined-loop-variable
+            'avatar': robot_avator,
         })
         torch.cuda.empty_cache()
 
