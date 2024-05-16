@@ -33,11 +33,11 @@ logger = logging.get_logger(__name__)
 
 # prepare model
 import os
-# print(not os.path.exists('/home/xlab-app-center/model/civil-exam-internlm2-chat-7B'))
-# if not os.path.exists('/home/xlab-app-center/model/civil-exam-internlm2-chat-7B'):
-from modelscope.snapshot_download import snapshot_download
-model_dir = snapshot_download('yangchanghui/civil-exam-internlm2-chat-7B', cache_dir='/home/xlab-app-center/model/civil-exam-internlm2-chat-7B')
-print('model_dir',model_dir)
+
+if not os.path.exists('/home/xlab-app-center/model/yangchanghui/civil-exam-internlm2-chat-7B'):
+    from modelscope.hub.snapshot_download import snapshot_download
+    model_dir = snapshot_download('yangchanghui/civil-exam-internlm2-chat-7B', cache_dir='/home/xlab-app-center/model/')
+
 @dataclass
 class GenerationConfig:
     # this config is used for chat to provide more diversity
@@ -187,10 +187,10 @@ def on_btn_click():
 @st.cache_resource
 def load_model():
     
-    model = (AutoModelForCausalLM.from_pretrained('/home/xlab-app-center/model/civil-exam-internlm2-chat-7B',
+    model = (AutoModelForCausalLM.from_pretrained('/home/xlab-app-center/model/yangchanghui/civil-exam-internlm2-chat-7B',
                                                   trust_remote_code=True).to(
                                                       torch.bfloat16).cuda())
-    tokenizer = AutoTokenizer.from_pretrained('/home/xlab-app-center/model/civil-exam-internlm2-chat-7B',
+    tokenizer = AutoTokenizer.from_pretrained('/home/xlab-app-center/model/yangchanghui/civil-exam-internlm2-chat-7B',
                                               trust_remote_code=True)
     return model, tokenizer
 
