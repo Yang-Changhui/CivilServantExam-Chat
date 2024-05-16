@@ -34,9 +34,9 @@ logger = logging.get_logger(__name__)
 # prepare model
 import os
 
-if not os.path.exists('/home/xlab-app-center/model/yangchanghui/civil-exam-internlm2-chat-7B'):
-    from modelscope.hub.snapshot_download import snapshot_download
-    model_dir = snapshot_download('yangchanghui/civil-exam-internlm2-chat-7B', cache_dir='/home/xlab-app-center/model/')
+# if not os.path.exists('/home/xlab-app-center/model/yangchanghui/civil-exam-internlm2-chat-7B'):
+from modelscope.hub.snapshot_download import snapshot_download
+model_dir = snapshot_download('yangchanghui/civil-exam-internlm2-chat-7B', cache_dir='/home/xlab-app-center/model/')
 
 @dataclass
 class GenerationConfig:
