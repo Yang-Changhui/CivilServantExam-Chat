@@ -243,7 +243,7 @@ def main():
     model, tokenizer = load_model()
     print('load model end.')
 
-    user_avator = 'assets/robot.png'
+    user_avator = 'assets/user.png'
     robot_avator = 'assets/robot.png'
 
     st.title('Civil-Servent-Exam-InternLM2-Chat-7B')
