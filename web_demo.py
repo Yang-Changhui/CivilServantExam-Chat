@@ -38,6 +38,8 @@ import os
 from modelscope.hub.snapshot_download import snapshot_download
 model_dir = snapshot_download('yangchanghui/civil-exam-internlm2-chat-7B', cache_dir='/home/xlab-app-center/model/')
 print(model_dir)
+
+
 @dataclass
 class GenerationConfig:
     # this config is used for chat to provide more diversity
